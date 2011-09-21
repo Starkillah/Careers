@@ -1,7 +1,6 @@
 package org.blockface.careers.jobs;
 
 
-import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.persistance.PersistanceManager;
 import org.bukkit.Bukkit;
