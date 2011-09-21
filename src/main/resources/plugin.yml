@@ -1,0 +1,12 @@
+author: SwearWord
+main: org.blockface.careers.Careers
+name: Careers2
+url: http://blockface.org/
+version: '2.0'
+commands:
+    setjob:
+        description: Set job.
+        usage: /setjob <career> [player];
+    jobinfo:
+        description: See info about job.
+        usage: /info
