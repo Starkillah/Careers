@@ -23,6 +23,8 @@ public enum Language {
     HELP ("help", "[Help]", 0),
 
     LEVELUP("notifications.levelup","You have are now at level %s!",0),
+    THEFT_FAILED("notifications.theftfailed","You've failed to pick the lock.",0),
+    THEFT_SUCCEEDED("notifications.thiefsucceeded","You managed to pick the lock.",0),
 
     ;
 

@@ -20,7 +20,6 @@ public class Config {
     private static Plugin plugin;
     private static CommentedConfiguration config;
     private static HashSet<String> SWITCHABLES;
-    private static HashSet<String> USABLES;
 
     /**
      * Loads the configuration data into memory and sets defaults
@@ -44,6 +43,7 @@ public class Config {
 
         // Sets defaults config values
         setDefaults();
+        SWITCHABLES = createHashSet(getString(SWITCH_IDS));
 
         // Saves the configuration from memory to file
         config.save();
@@ -90,4 +90,13 @@ public class Config {
     public static Boolean isDebugging() {
         return getBoolean(ISDEBUGGING);
     }
+
+    public static Boolean isSwitchable(int id) {
+        return SWITCHABLES.contains(Integer.toString(id));
+    }
+
+    public static Integer getThiefDamage() {
+        return getInt(THIEF_DAMAGE);
+    }
+
 }

@@ -5,7 +5,9 @@ package org.blockface.careers.config;
  */
 public enum ConfigPath {
     LANGUAGE("settings.language_file", "english.yml", "# This is the language file you wish to use."),
-    ISDEBUGGING("settings.isDebugging","true","# Do not touch.")
+    ISDEBUGGING("settings.isDebugging","true","# Do not touch."),
+    SWITCH_IDS("settings.switchIds","25,54,61,62,64,69,70,71,72,77,96,84,93,94", "# Switchable blocks"),
+    THIEF_DAMAGE("settings.thiefDamage",1,"# Amount of damage done on failed pick."),
     ;
 
     private String path;

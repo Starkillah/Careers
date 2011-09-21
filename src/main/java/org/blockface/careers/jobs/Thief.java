@@ -21,14 +21,14 @@ public class Thief extends GenericJob {
         this.color = ChatColor.GRAY;
     }
 
-    private float getPickChance() {
+    public int getPickChance() {
         float level = this.getLevel();
-        return 25*(1-6/(level+6));
+        return (int)(50*(1-6/(level+6)));
     }
 
     @Override
     public void printInfo(Player player) {
         super.printInfo(player);
-        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Lock Pick Chance: " + getPickChance());
+        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Lock Pick Chance: " + getPickChance() + "%");
     }
 }
