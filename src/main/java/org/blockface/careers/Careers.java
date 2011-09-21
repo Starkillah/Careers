@@ -1,5 +1,6 @@
 package org.blockface.careers;
 
+import org.blockface.bukkitstats.CallHome;
 import org.blockface.careers.commands.Info;
 import org.blockface.careers.commands.SetJob;
 import org.blockface.careers.config.Config;
@@ -24,6 +25,9 @@ public class Careers extends JavaPlugin {
 
     public void onEnable() {
         plugin = this;
+
+        //Call Home
+        CallHome.load(this);
 
         try {
             //Load Config
