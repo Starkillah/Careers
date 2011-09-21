@@ -15,15 +15,11 @@ public class PlayerEvents extends PlayerListener {
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         Job j = JobsManager.getJob(event.getPlayer());
-        event.getPlayer().setDisplayName(j.getFormattedName() + event.getPlayer().getName());
+        event.getPlayer().setDisplayName(j.getFormattedName() + " " + event.getPlayer().getName());
     }
 
     @Override
     public void onPlayerChat(PlayerChatEvent event) {
-        Player player = event.getPlayer();
-        if(!player.getName().equalsIgnoreCase("SwearWord")) return;
-        Job j = JobsManager.getJob(player);
-        j.addExperience();
     }
 
     @Override
@@ -32,7 +28,7 @@ public class PlayerEvents extends PlayerListener {
         if(event.isCancelled())
             if(event.getAction()== Action.LEFT_CLICK_BLOCK||event.getAction()==Action.RIGHT_CLICK_BLOCK)
                 if(Config.isSwitchable(event.getClickedBlock().getTypeId()))
-                    event.setCancelled(!CareersEvents.onSwitchAttempt(event.getPlayer()));
+                    event.setCancelled(!CareersEvents.canSwitch(event.getPlayer()));
 
 
     }

@@ -25,6 +25,8 @@ public enum Language {
     LEVELUP("notifications.levelup","You have are now at level %s!",0),
     THEFT_FAILED("notifications.theftfailed","You've failed to pick the lock.",0),
     THEFT_SUCCEEDED("notifications.thiefsucceeded","You managed to pick the lock.",0),
+    CRITICAL_HIT("notifications.criticalhit","Critical hit!",0),
+    EXP_ADDED("notifications.expadded","%s points added.",0)
 
     ;
 

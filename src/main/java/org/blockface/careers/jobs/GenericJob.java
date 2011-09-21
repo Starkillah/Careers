@@ -95,4 +95,8 @@ public class GenericJob implements Job{
         player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN+"Experience Points: " + this.exp + " / " + newxp);
         player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN+"Next Level: " + (newxp-this.exp));
     }
+
+    public void applyTitle() {
+        Bukkit.getServer().getPlayer(this.player).setDisplayName(this.getFormattedName() + " " + this.player);
+    }
 }

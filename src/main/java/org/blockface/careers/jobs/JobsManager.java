@@ -18,6 +18,7 @@ public class JobsManager {
     public static Job constructJob(String job,String player) {
         Job ret = new GenericJob(player);
         if(job.equalsIgnoreCase("Thief")) ret = new Thief(player);
+        if(job.equalsIgnoreCase("Murderer")) ret = new Murderer(player);
         return ret;
     }
 
@@ -36,6 +37,7 @@ public class JobsManager {
         JOBS.put(job.getPlayer(),job);
         PersistanceManager.saveJob(job);
         Logging.info(job.getPlayer() + " is now a " + job.getName());
+        job.applyTitle();
     }
 
 }

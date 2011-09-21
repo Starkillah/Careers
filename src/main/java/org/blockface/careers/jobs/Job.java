@@ -42,4 +42,6 @@ public interface Job {
 
     public void printInfo(Player player);
 
+    public void applyTitle();
+
 }
