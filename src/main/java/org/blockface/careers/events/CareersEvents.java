@@ -1,12 +1,13 @@
 package org.blockface.careers.events;
 
 import org.blockface.careers.config.Config;
-import org.blockface.careers.jobs.Job;
-import org.blockface.careers.jobs.JobsManager;
-import org.blockface.careers.jobs.Murderer;
-import org.blockface.careers.jobs.Thief;
+import org.blockface.careers.jobs.*;
 import org.blockface.careers.locale.Language;
+import org.blockface.careers.locale.Logging;
+import org.blockface.careers.managers.CrimeManager;
+import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.managers.ProvokeManager;
+import org.blockface.careers.objects.Crime;
 import org.blockface.careers.util.Tools;
 import org.bukkit.entity.Player;
 
@@ -40,10 +41,36 @@ public class CareersEvents {
             if(Tools.randBoolean(murderer.getCriticalHitChance())) {
                 victim.damage(2);
                 Language.CRITICAL_HIT.good(attacker);
+            }}
+        if(jv.hasAbility(Job.ABILITIES.ARREST)) {
+            if(!CrimeManager.isWanted(attacker.getName())) CrimeManager.addWanted(attacker.getName(), Crime.TYPE.ASSAULT);
+            Officer officer = (Officer)jv;
+            if(Tools.randBoolean(officer.getDodgeChance())) {
+                Language.DODGED.good(victim);
+                Language.WAS_DODGED.bad(attacker);
+                return false;
             }
         }
-
+        ProvokeManager.addProvoker(victim,attacker);
         return true;
     }
 
+    public static void onPlayerDeath(Player attacker, Player victim) {
+        Logging.info("Death fired.");
+        Job ja = JobsManager.getJob(attacker);
+        if(ja instanceof Murderer) {
+            ja.addExperience();
+            CrimeManager.alertWitnesses(attacker,victim, Crime.TYPE.MURDER);
+        }
+
+    }
+
+    public static void onPoke(Player player, Player rightClicked) {
+        Job jp = JobsManager.getJob(player);
+        Job jrc = JobsManager.getJob(rightClicked);
+        if(jp.hasAbility(Job.ABILITIES.ARREST) && CrimeManager.isWanted(rightClicked.getName())) {
+            JailManager.arrestPlayer(rightClicked,player);
+            jp.addExperience();
+        }
+    }
 }

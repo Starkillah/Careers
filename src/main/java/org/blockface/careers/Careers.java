@@ -63,6 +63,8 @@ public class Careers extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_JOIN,pe, Event.Priority.Normal,this);
         pm.registerEvent(Event.Type.PLAYER_CHAT,pe, Event.Priority.Normal,this);
         pm.registerEvent(Event.Type.PLAYER_INTERACT,pe, Event.Priority.Highest,this);
+        pm.registerEvent(Event.Type.PLAYER_INTERACT_ENTITY,pe, Event.Priority.Highest,this);
+        pm.registerEvent(Event.Type.PLAYER_TELEPORT,pe, Event.Priority.Highest,this);
 
         //Entity Events
         EntityEvents ee = new EntityEvents();

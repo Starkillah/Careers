@@ -3,23 +3,27 @@ package org.blockface.careers.events;
 import org.blockface.careers.config.Config;
 import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
+import org.blockface.careers.locale.Language;
+import org.blockface.careers.managers.CrimeManager;
+import org.blockface.careers.managers.JailManager;
+import org.blockface.careers.managers.WitnessManager;
+import org.blockface.careers.objects.Witness;
 import org.blockface.careers.util.Tools;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerChatEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerListener;
+import org.bukkit.event.player.*;
 
 public class PlayerEvents extends PlayerListener {
     @Override
     public void onPlayerJoin(PlayerJoinEvent event) {
         Job j = JobsManager.getJob(event.getPlayer());
-        event.getPlayer().setDisplayName(j.getFormattedName() + " " + event.getPlayer().getName());
+        j.applyTitle();
     }
 
     @Override
     public void onPlayerChat(PlayerChatEvent event) {
+        Witness witness = WitnessManager.getWitness(event.getPlayer().getName());
+        witness.parseChat(event.getMessage());
     }
 
     @Override
@@ -31,5 +35,18 @@ public class PlayerEvents extends PlayerListener {
                     event.setCancelled(!CareersEvents.canSwitch(event.getPlayer()));
 
 
+    }
+
+    @Override
+    public void onPlayerTeleport(PlayerTeleportEvent event) {
+        if(CrimeManager.isWanted(event.getPlayer().getName()) || JailManager.isJailed(event.getPlayer())) {
+            Language.TELEPORT.bad(event.getPlayer());
+            event.setCancelled(true);
+        }
+    }
+
+    @Override
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
+        if(event.getRightClicked() instanceof Player) CareersEvents.onPoke(event.getPlayer(),(Player)event.getRightClicked());
     }
 }

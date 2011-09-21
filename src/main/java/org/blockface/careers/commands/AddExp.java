@@ -1,6 +1,5 @@
 package org.blockface.careers.commands;
 
-import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Language;
 import org.bukkit.command.Command;
@@ -22,10 +21,8 @@ public class AddExp implements CommandExecutor{
     }
 
     public int parseInt(String s) {
-        int result=0;
         try{
-            result = Integer.parseInt(s);
-            return (result<0) ? 0 : result;
+            return Integer.parseInt(s);
         }
         catch (NumberFormatException exception) {
             return 0;

@@ -2,8 +2,10 @@ package org.blockface.careers.locale;
 
 import org.blockface.careers.Careers;
 import org.blockface.careers.config.Config;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.util.config.Configuration;
 
 import java.io.File;
@@ -18,15 +20,23 @@ import java.util.List;
 public enum Language {
     NO_COMMAND_PERMISSION ("command.no_permission", "You do not have permission to access this command!", 0),
     IN_GAME_ONLY ("misc.in_game_only", "Only in game players may use this feature!", 0),
-    ERROR ("error", "[Error]", 0),
-    SUCCESS ("success", "[Success]", 0),
+    ERROR ("error", "[Careers]", 0),
+    SUCCESS ("success", "[Careers]", 0),
     HELP ("help", "[Help]", 0),
 
     LEVELUP("notifications.levelup","You have are now at level %s!",0),
     THEFT_FAILED("notifications.theftfailed","You've failed to pick the lock.",0),
     THEFT_SUCCEEDED("notifications.thiefsucceeded","You managed to pick the lock.",0),
     CRITICAL_HIT("notifications.criticalhit","Critical hit!",0),
-    EXP_ADDED("notifications.expadded","%s points added.",0)
+    EXP_ADDED("notifications.expadded","%s points added.",0),
+    WANTED("notification.wanted","%s is wanted for %s",0),
+    WITNESSED("notification.witnessed","You just saw %s commit %s.",0),
+    SAW_YOU("notification.sawyou","%s just saw you commit %s.",0),
+    TELEPORT("notification.teleport","You cannot teleport right now.",0),
+    REPORTED("notification.reported","You have reported %s to the police.",0),
+    DODGED("notification.dodged","You haved dodged the attack!",0),
+    WAS_DODGED("notification.wasdodged","Your attack was dodged!",0),
+    ARRESTED("notification.arrested","%s was arrested for %s",0),
 
     ;
 
@@ -206,8 +216,31 @@ public enum Language {
         }
     }
 
+    public void broadcastBad(Object... args) {
+        for(Player player : Bukkit.getServer().getOnlinePlayers()) {
+            send(ChatColor.RED + Language.ERROR.getString(),player,args);
+        }
+    }
+
+    public void broadcastGood(Object... args) {
+        for(Player player : Bukkit.getServer().getOnlinePlayers()) {
+            send(ChatColor.GREEN + Language.SUCCESS.getString(),player,args);
+        }
+    }
+
     public void good(CommandSender sender, Object... args) {
         send(ChatColor.GREEN.toString() + Language.SUCCESS.getString(), sender, args);
+    }
+
+    public void good(String sender, Object... args) {
+        Player player = Bukkit.getServer().matchPlayer(sender).get(0);
+        if(player==null) return;
+        good(player,args);
+    }
+    public void bad(String sender, Object... args) {
+        Player player = Bukkit.getServer().matchPlayer(sender).get(0);
+        if(player==null) return;
+        bad(player,args);
     }
 
     public void help(CommandSender sender, Object... args) {

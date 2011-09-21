@@ -19,6 +19,7 @@ public class JobsManager {
         Job ret = new GenericJob(player);
         if(job.equalsIgnoreCase("Thief")) ret = new Thief(player);
         if(job.equalsIgnoreCase("Murderer")) ret = new Murderer(player);
+        if(job.equalsIgnoreCase("Officer")) ret = new Officer(player);
         return ret;
     }
 

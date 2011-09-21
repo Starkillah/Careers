@@ -28,6 +28,6 @@ public class Murderer extends GenericJob {
     @Override
     public void printInfo(Player player) {
         super.printInfo(player);
-        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Critical Hit Chance: " + getCriticalHitChance() + "%");
+        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Critical Hit Chance: " + this.getCriticalHitChance() + "%");
     }
 }
