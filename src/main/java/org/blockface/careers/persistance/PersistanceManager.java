@@ -3,6 +3,7 @@ package org.blockface.careers.persistance;
 import org.blockface.careers.Careers;
 import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
+import org.bukkit.Location;
 
 public class PersistanceManager {
 
@@ -29,5 +30,13 @@ public class PersistanceManager {
         for(Job j : JobsManager.getAllJobs()) {
             saveJob(j);
         }
+    }
+
+    public static void setJail(Location location) {
+        db.setJail(location);
+    }
+
+    public static Location getJail() {
+        return db.getJail();
     }
 }

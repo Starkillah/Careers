@@ -44,7 +44,6 @@ public class Inmate
 	
 	public Boolean SentenceOver()
 	{
-		if(Calendar.getInstance().getTimeInMillis()>this.release) return true;
-		return false;
+		return Calendar.getInstance().getTimeInMillis()>this.release;
 	}
 }

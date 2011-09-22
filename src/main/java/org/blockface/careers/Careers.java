@@ -3,12 +3,14 @@ package org.blockface.careers;
 import org.blockface.bukkitstats.CallHome;
 import org.blockface.careers.commands.AddExp;
 import org.blockface.careers.commands.Info;
+import org.blockface.careers.commands.SetJail;
 import org.blockface.careers.commands.SetJob;
 import org.blockface.careers.config.Config;
 import org.blockface.careers.events.EntityEvents;
 import org.blockface.careers.events.PlayerEvents;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.locale.Logging;
+import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.persistance.PersistanceManager;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
@@ -38,6 +40,11 @@ public class Careers extends JavaPlugin {
             Language.load();
             //Load Persistance
             PersistanceManager.load();
+
+            //Load Jail
+            JailManager.load();
+
+            //Load Logger
             Logging.load(this);
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -53,6 +60,7 @@ public class Careers extends JavaPlugin {
         getCommand("setjob").setExecutor(new SetJob());
         getCommand("jobinfo").setExecutor(new Info());
         getCommand("addexp").setExecutor(new AddExp());
+        getCommand("setjail").setExecutor(new SetJail());
     }
 
     private void registerEvents() {

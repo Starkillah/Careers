@@ -26,7 +26,7 @@ public class CareersEvents {
             Language.THEFT_FAILED.bad(player);
             player.damage(Config.getThiefDamage());
         }
-
+        CrimeManager.alertWitnesses(player,player, Crime.TYPE.THEFT);
         return res;
     }
 

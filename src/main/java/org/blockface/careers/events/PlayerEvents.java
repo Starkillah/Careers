@@ -7,6 +7,7 @@ import org.blockface.careers.locale.Language;
 import org.blockface.careers.managers.CrimeManager;
 import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.managers.WitnessManager;
+import org.blockface.careers.objects.Inmate;
 import org.blockface.careers.objects.Witness;
 import org.blockface.careers.util.Tools;
 import org.bukkit.entity.Player;
@@ -28,11 +29,19 @@ public class PlayerEvents extends PlayerListener {
 
     @Override
     public void onPlayerInteract(PlayerInteractEvent event) {
+
+        if(JailManager.isJailed(event.getPlayer())) {
+            event.setCancelled(true);
+            Inmate inmate = JailManager.getInmate(event.getPlayer());
+            Language.JAIL_TIME.bad(event.getPlayer(),inmate.getTimeLeft());
+        }
+
         //See if switch attempt
         if(event.isCancelled())
             if(event.getAction()== Action.LEFT_CLICK_BLOCK||event.getAction()==Action.RIGHT_CLICK_BLOCK)
                 if(Config.isSwitchable(event.getClickedBlock().getTypeId()))
                     event.setCancelled(!CareersEvents.canSwitch(event.getPlayer()));
+
 
 
     }

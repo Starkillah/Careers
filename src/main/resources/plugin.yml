@@ -13,3 +13,6 @@ commands:
     addexp:
         description: Add experience points.
         usage: /addexp <number>
+    setjail:
+        description: Set jail.
+        usage: /setjail
