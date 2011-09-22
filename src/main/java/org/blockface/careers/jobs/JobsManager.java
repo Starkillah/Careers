@@ -20,6 +20,7 @@ public class JobsManager {
         if(job.equalsIgnoreCase("Thief")) ret = new Thief(player);
         if(job.equalsIgnoreCase("Murderer")) ret = new Murderer(player);
         if(job.equalsIgnoreCase("Officer")) ret = new Officer(player);
+        if(job.equalsIgnoreCase("Knight")) ret = new Knight(player);
         return ret;
     }
 

@@ -10,6 +10,7 @@ import org.blockface.careers.events.EntityEvents;
 import org.blockface.careers.events.PlayerEvents;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.locale.Logging;
+import org.blockface.careers.managers.EconomyManager;
 import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.persistance.PersistanceManager;
 import org.bukkit.event.Event;
@@ -46,6 +47,9 @@ public class Careers extends JavaPlugin {
 
             //Load Logger
             Logging.load(this);
+
+            //Load Economy
+            EconomyManager.load(this);
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

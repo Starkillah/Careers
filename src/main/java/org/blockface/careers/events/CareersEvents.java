@@ -5,11 +5,16 @@ import org.blockface.careers.jobs.*;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.locale.Logging;
 import org.blockface.careers.managers.CrimeManager;
+import org.blockface.careers.managers.EconomyManager;
 import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.managers.ProvokeManager;
 import org.blockface.careers.objects.Crime;
 import org.blockface.careers.util.Tools;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import sun.rmi.runtime.Log;
 
 public class CareersEvents {
 
@@ -56,13 +61,13 @@ public class CareersEvents {
     }
 
     public static void onPlayerDeath(Player attacker, Player victim) {
-        Logging.info("Death fired.");
+        Logging.info("Death");
         Job ja = JobsManager.getJob(attacker);
         if(ja instanceof Murderer) {
             ja.addExperience();
             CrimeManager.alertWitnesses(attacker,victim, Crime.TYPE.MURDER);
         }
-
+        EconomyManager.payAll(victim,attacker);
     }
 
     public static void onPoke(Player player, Player rightClicked) {
@@ -72,5 +77,17 @@ public class CareersEvents {
             JailManager.arrestPlayer(rightClicked,player);
             jp.addExperience();
         }
+    }
+
+    public static void onMobDamage(Entity entity, Player damager, int damage) {
+        Job jd = JobsManager.getJob(damager.getName());
+        if(!jd.hasAbility(Job.ABILITIES.ANTIMOB) && !(entity instanceof Creature)) return;
+        Creature creature = (Creature)entity;
+        Knight knight = (Knight)jd;
+        if(Tools.randBoolean(knight.getKOChance())) creature.damage(1000);
+        if(creature.getHealth() - damage <= 0) {
+            EconomyManager.payWage(damager, Config.getKnightWage());
+            jd.addExperience();}
+
     }
 }

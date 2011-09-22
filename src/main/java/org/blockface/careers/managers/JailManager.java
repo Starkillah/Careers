@@ -1,6 +1,7 @@
 package org.blockface.careers.managers;
 
 import org.blockface.careers.Careers;
+import org.blockface.careers.config.Config;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.objects.Crime;
 import org.blockface.careers.objects.Inmate;
@@ -53,6 +54,7 @@ public class JailManager {
 		jailed.put(criminal, new Inmate(criminal, crime, time));
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(), new FreeJailed(criminal), 20L * time * 60);
         Language.ARRESTED.broadcastGood(criminal.getName(),crime.getType().name().toLowerCase());
+        EconomyManager.payWage(officer, Config.getOfficerWage());
     }
 
     private static void dropInventory(Player player)

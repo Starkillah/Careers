@@ -99,4 +99,16 @@ public class Config {
         return getInt(THIEF_DAMAGE);
     }
 
+    public static String getSourceAccount() {
+        return getString(ACCOUNT_NAME);
+    }
+
+    public static int getOfficerWage() {
+        return getInt(ARREST_WAGE);
+    }
+
+    public static int getKnightWage() {
+        return getInt(KNIGHT_WAGE);
+    }
+
 }

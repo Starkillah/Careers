@@ -38,7 +38,7 @@ public class GenericJob implements Job{
     }
 
     public String getFormattedName() {
-        return this.color + this.name;
+        return this.color + this.name + ChatColor.WHITE;
     }
 
     public String getPluralName() {

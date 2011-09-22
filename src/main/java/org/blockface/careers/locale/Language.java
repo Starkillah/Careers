@@ -37,9 +37,12 @@ public enum Language {
     DODGED("notification.dodged","You haved dodged the attack!",0),
     WAS_DODGED("notification.wasdodged","Your attack was dodged!",0),
     ARRESTED("notification.arrested","%s was arrested for %s",0),
-    FREED("notification.freed","You were relseased from jail.",0),
+    FREED("notification.freed","You were released from jail.",0),
     JAIL_TIME("notification.jailtime","Jail time left: %s",0),
-    SET_JAIL("notification.setjail","Jail set.",0)
+    SET_JAIL("notification.setjail","Jail set.",0),
+    NO_MONEY("notification.nomoney","Government is bankrupt, sorry.",0),
+    RECEIVED_MONEY("notification.receivedmoney","You were paid %s",0),
+    SENT_MONEY("notification.sentmoney","You paid %s",0)
 
     ;
 
