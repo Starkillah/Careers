@@ -10,6 +10,7 @@ public class KillPoisoned implements Runnable{
 
     public KillPoisoned(Player victim,Player attacker) {
         this.victim = victim;
+        this.attacker = attacker;
     }
 
     public void run() {

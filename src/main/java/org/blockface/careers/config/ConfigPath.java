@@ -12,7 +12,7 @@ public enum ConfigPath {
     ACCOUNT_NAME("settings.economy.accountName","SwearWord","# Account to take money from to pay Knights/Officers."),
     KNIGHT_WAGE("settings.economy.knightReward",5,"# Amount to pay knight for each mob kill."),
     WANTED_TIME("settings.crime.wantedTime",5,"# Amount of time criminal stays wanted."),
-    POISON_TIME("settings.crime.wantedTime",60,"# Seconds until poison kills player.")
+    POISON_TIME("settings.crime.poisonTime",60,"# Seconds until poison kills player.")
     ;
 
 

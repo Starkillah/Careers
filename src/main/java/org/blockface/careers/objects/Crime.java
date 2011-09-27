@@ -13,7 +13,8 @@ public class Crime {
     public enum TYPE {
         MURDER,
         THEFT,
-        ASSAULT
+        ASSAULT,
+        POISONING
     }
     private TYPE crimeType;
     private String criminal;

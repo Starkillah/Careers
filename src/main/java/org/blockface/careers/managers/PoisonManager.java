@@ -5,10 +5,12 @@ import org.blockface.careers.config.Config;
 import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Language;
+import org.blockface.careers.objects.Crime;
 import org.blockface.careers.tasks.KillPoisoned;
 import org.blockface.careers.util.Tools;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 
@@ -20,16 +22,23 @@ public class PoisonManager {
     }
 
     public static void poisonPlayer(Player victim, Player attacker, Job ja) {
-        if(!ja.hasAbility(Job.ABILITIES.POISON)) return;
-        attacker.getItemInHand().setAmount(attacker.getItemInHand().getAmount()-1);
+        if(!Tools.isNight(attacker.getLocation())) {
+            Language.NIGHT_ONLY.bad(attacker);
+            return;}
+        ItemStack shrooms = attacker.getItemInHand();
+        if(shrooms.getAmount()==1){
+            attacker.setItemInHand(null);
+            return;}
+        shrooms.setAmount(shrooms.getAmount() - 1);
         if(Tools.randBoolean(ja.getAbilityChance())) {
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(),new KillPoisoned(victim,attacker),20L* Config.getFastPoisonTime());
             Language.POISONED_FAST.good(attacker,victim.getDisplayName());}
         else {
-            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(),new KillPoisoned(victim,attacker),20L* Config.getPoisonTime());
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(),new KillPoisoned(victim,attacker),20L * Config.getPoisonTime());
             Language.POISONED_SUCCESS.good(attacker,victim.getDisplayName());}
-
+        poisonedPlayers.add(victim.getName());
         Language.POISONED.bad(victim);
+        CrimeManager.alertWitnesses(attacker,victim, Crime.TYPE.POISONING);
 
     }
 

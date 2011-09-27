@@ -46,8 +46,9 @@ public enum Language {
     CRIMINAL_ESCAPED("notification.escape","%s escaped with his crimes.",0),
     POISONED("notification.poisoned","You have been poisoned, find a doctor quick!",0),
     POISONED_SUCCESS("notification.poisonedsuccess","You poisoned %s.",0),
-    POISONED_FAST("notification.poisonedsuccess","You poisoned %s severely.",0),
-    POISONED_DEATH("notification.poisoneddeath","%s has died from poisoning",0)
+    POISONED_FAST("notification.poisonedfast","You poisoned %s severely.",0),
+    POISONED_DEATH("notification.poisoneddeath","%s has died from poisoning",0),
+    NIGHT_ONLY("notification.nightonly","You may only kill at night.",0)
 
 
     ;
