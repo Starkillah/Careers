@@ -20,7 +20,6 @@ public class EntityEvents extends EntityListener{
                 Player victim = (Player)event.getEntity();
                 Player attacker = (Player)subEvent.getDamager();
                 event.setCancelled(!CareersEvents.canPVP(attacker,victim));
-                Logging.info(event.getDamage() + ":" + victim.getHealth());
                 if(!event.isCancelled())
                     if(victim.getHealth()-subEvent.getDamage() < 1)
                         CareersEvents.onPlayerDeath(attacker,victim);

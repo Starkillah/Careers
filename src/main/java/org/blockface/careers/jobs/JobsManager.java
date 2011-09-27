@@ -2,6 +2,7 @@ package org.blockface.careers.jobs;
 
 import org.blockface.careers.locale.Logging;
 import org.blockface.careers.persistance.PersistanceManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
@@ -21,6 +22,7 @@ public class JobsManager {
         if(job.equalsIgnoreCase("Murderer")) ret = new Murderer(player);
         if(job.equalsIgnoreCase("Officer")) ret = new Officer(player);
         if(job.equalsIgnoreCase("Knight")) ret = new Knight(player);
+        if(job.equalsIgnoreCase("Assassin")) ret = new Assassin(player);
         return ret;
     }
 
@@ -36,10 +38,10 @@ public class JobsManager {
     }
 
     public static void setJob(Job job) {
-        JOBS.put(job.getPlayer(),job);
+        JOBS.put(job.getPlayer(), job);
         PersistanceManager.saveJob(job);
-        Logging.info(job.getPlayer() + " is now a " + job.getName());
         job.applyTitle();
+        job.printInfo(Bukkit.getServer().getPlayer(job.getPlayer()));
     }
 
 }

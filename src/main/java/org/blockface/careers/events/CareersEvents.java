@@ -3,28 +3,22 @@ package org.blockface.careers.events;
 import org.blockface.careers.config.Config;
 import org.blockface.careers.jobs.*;
 import org.blockface.careers.locale.Language;
-import org.blockface.careers.locale.Logging;
-import org.blockface.careers.managers.CrimeManager;
-import org.blockface.careers.managers.EconomyManager;
-import org.blockface.careers.managers.JailManager;
-import org.blockface.careers.managers.ProvokeManager;
+import org.blockface.careers.managers.*;
 import org.blockface.careers.objects.Crime;
 import org.blockface.careers.util.Tools;
+import org.bukkit.Material;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import sun.rmi.runtime.Log;
 
 public class CareersEvents {
 
     public static boolean canSwitch(Player player) {
         Job job = JobsManager.getJob(player);
         if(!job.hasAbility(Job.ABILITIES.LOCKPICK)) return false;
-        Thief thief = (Thief)job;
-        Boolean res = Tools.randBoolean(thief.getPickChance());
+        Boolean res = Tools.randBoolean(job.getAbilityChance());
         if(res) {
-            thief.addExperience();
+            job.addExperience();
             Language.THEFT_SUCCEEDED.good(player);
         }
         else {
@@ -42,15 +36,13 @@ public class CareersEvents {
         //Return if cannot kill
         if(!ja.hasAbility(Job.ABILITIES.KILL) && !ProvokeManager.isProvoker(attacker,victim)) return false;
         if(ja.hasAbility(Job.ABILITIES.KILL)) {
-            Murderer murderer = (Murderer)ja;
-            if(Tools.randBoolean(murderer.getCriticalHitChance())) {
+            if(Tools.randBoolean(ja.getAbilityChance())) {
                 victim.damage(2);
                 Language.CRITICAL_HIT.good(attacker);
             }}
         if(jv.hasAbility(Job.ABILITIES.ARREST)) {
             if(!CrimeManager.isWanted(attacker.getName())) CrimeManager.addWanted(attacker.getName(), Crime.TYPE.ASSAULT);
-            Officer officer = (Officer)jv;
-            if(Tools.randBoolean(officer.getDodgeChance())) {
+            if(Tools.randBoolean(jv.getAbilityChance())) {
                 Language.DODGED.good(victim);
                 Language.WAS_DODGED.bad(attacker);
                 return false;
@@ -61,7 +53,6 @@ public class CareersEvents {
     }
 
     public static void onPlayerDeath(Player attacker, Player victim) {
-        Logging.info("Death");
         Job ja = JobsManager.getJob(attacker);
         if(ja instanceof Murderer) {
             ja.addExperience();
@@ -73,18 +64,22 @@ public class CareersEvents {
     public static void onPoke(Player player, Player rightClicked) {
         Job jp = JobsManager.getJob(player);
         Job jrc = JobsManager.getJob(rightClicked);
+
+        //Police Arrest
         if(jp.hasAbility(Job.ABILITIES.ARREST) && CrimeManager.isWanted(rightClicked.getName())) {
             JailManager.arrestPlayer(rightClicked,player);
-            jp.addExperience();
-        }
+            jp.addExperience();}
+
+        //Poison
+        if(jp.hasAbility(Job.ABILITIES.POISON) && player.getItemInHand().getType().equals(Material.BROWN_MUSHROOM) && !PoisonManager.isPoisoned(rightClicked)) {
+            PoisonManager.poisonPlayer(rightClicked,player, jp);}
     }
 
     public static void onMobDamage(Entity entity, Player damager, int damage) {
         Job jd = JobsManager.getJob(damager.getName());
-        if(!jd.hasAbility(Job.ABILITIES.ANTIMOB) && !(entity instanceof Creature)) return;
+        if(!jd.hasAbility(Job.ABILITIES.ANTIMOB) || !(entity instanceof Creature)) return;
         Creature creature = (Creature)entity;
-        Knight knight = (Knight)jd;
-        if(Tools.randBoolean(knight.getKOChance())) creature.damage(1000);
+        if(Tools.randBoolean(jd.getAbilityChance())) creature.damage(1000);
         if(creature.getHealth() - damage <= 0) {
             EconomyManager.payWage(damager, Config.getKnightWage());
             jd.addExperience();}

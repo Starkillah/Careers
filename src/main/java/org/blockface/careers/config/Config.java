@@ -111,4 +111,16 @@ public class Config {
         return getInt(KNIGHT_WAGE);
     }
 
+    public static int getWantedTime() {
+        return getInt(WANTED_TIME);
+    }
+
+    public static int getPoisonTime() {
+        return getInt(POISON_TIME);
+    }
+
+    public static int getFastPoisonTime() {
+        return getInt(POISON_TIME)/6;
+    }
+
 }

@@ -7,10 +7,12 @@ public enum ConfigPath {
     LANGUAGE("settings.language_file", "english.yml", "# This is the language file you wish to use."),
     ISDEBUGGING("settings.isDebugging",true,"# Do not touch."),
     SWITCH_IDS("settings.switchIds","25,54,61,62,64,69,70,71,72,77,96,84,93,94", "# Switchable blocks"),
-    THIEF_DAMAGE("settings.thiefDamage",1,"# Amount of damage done on failed pick."),
+    THIEF_DAMAGE("settings.crime.thiefDamage",1,"# Amount of damage done on failed pick."),
     ARREST_WAGE("settings.economy.arrestReward",50,"# Amonut to pay police officers."),
     ACCOUNT_NAME("settings.economy.accountName","SwearWord","# Account to take money from to pay Knights/Officers."),
-    KNIGHT_WAGE("settings.economy.knightReward",5,"# Amount to pay knight for each mob kill.")
+    KNIGHT_WAGE("settings.economy.knightReward",5,"# Amount to pay knight for each mob kill."),
+    WANTED_TIME("settings.crime.wantedTime",5,"# Amount of time criminal stays wanted."),
+    POISON_TIME("settings.crime.wantedTime",60,"# Seconds until poison kills player.")
     ;
 
 

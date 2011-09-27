@@ -28,7 +28,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
+      <resources>
       <resource>
         <targetPath>.</targetPath>
         <filtering>true</filtering>

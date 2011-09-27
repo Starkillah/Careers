@@ -42,7 +42,13 @@ public enum Language {
     SET_JAIL("notification.setjail","Jail set.",0),
     NO_MONEY("notification.nomoney","Government is bankrupt, sorry.",0),
     RECEIVED_MONEY("notification.receivedmoney","You were paid %s",0),
-    SENT_MONEY("notification.sentmoney","You paid %s",0)
+    SENT_MONEY("notification.sentmoney","You paid %s",0),
+    CRIMINAL_ESCAPED("notification.escape","%s escaped with his crimes.",0),
+    POISONED("notification.poisoned","You have been poisoned, find a doctor quick!",0),
+    POISONED_SUCCESS("notification.poisonedsuccess","You poisoned %s.",0),
+    POISONED_FAST("notification.poisonedsuccess","You poisoned %s severely.",0),
+    POISONED_DEATH("notification.poisoneddeath","%s has died from poisoning",0)
+
 
     ;
 

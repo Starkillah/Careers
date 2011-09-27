@@ -1,10 +1,13 @@
 package org.blockface.careers.managers;
 
+import org.blockface.careers.Careers;
+import org.blockface.careers.config.Config;
 import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.locale.Logging;
 import org.blockface.careers.objects.Crime;
+import org.blockface.careers.tasks.FreeWanted;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -19,11 +22,18 @@ public class CrimeManager {
         return wanted.containsKey(player);
     }
 
+    public static void escapedWanted(String player) {
+        if(!isWanted(player)) return;
+        wanted.remove(player);
+        Language.CRIMINAL_ESCAPED.broadcastBad(player);
+    }
+
     public static void addWanted(String player, Crime.TYPE type) {
-        Logging.info("Setting " + player + " as wanted.");
+        if(isWanted(player)) return;
         Crime c = new Crime(type,player);
         wanted.put(player,c);
         Language.WANTED.broadcastBad(player,type.name().toLowerCase());
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(),new FreeWanted(player),20L*60* Config.getWantedTime());
     }
 
     public static Crime getWanted(String player) {

@@ -20,14 +20,9 @@ public class Murderer extends GenericJob {
         this.color = ChatColor.DARK_RED;
     }
 
-    public int getCriticalHitChance() {
-        float level = this.getLevel();
-        return (int)(50*(1-6/(level+6)));
-    }
-
     @Override
     public void printInfo(Player player) {
         super.printInfo(player);
-        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Critical Hit Chance: " + this.getCriticalHitChance() + "%");
+        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Critical Hit Chance: " + this.getAbilityChance() + "%");
     }
 }

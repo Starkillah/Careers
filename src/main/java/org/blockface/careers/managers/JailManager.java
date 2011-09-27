@@ -28,8 +28,8 @@ public class JailManager {
     }
 
     public static void setJail(Location location) {
+        jail = location;
         PersistanceManager.setJail(jail);
-        jail = PersistanceManager.getJail();
     }
 
     public static boolean isJailed(Player player) {

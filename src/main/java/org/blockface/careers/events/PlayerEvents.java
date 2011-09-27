@@ -4,6 +4,7 @@ import org.blockface.careers.config.Config;
 import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Language;
+import org.blockface.careers.locale.Logging;
 import org.blockface.careers.managers.CrimeManager;
 import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.managers.WitnessManager;

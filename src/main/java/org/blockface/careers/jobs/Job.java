@@ -26,6 +26,8 @@ public interface Job {
 
     public String getPlayer();
 
+    public int getAbilityChance();
+
     public void setPlayer(String player);
 
     public Boolean hasAbility(ABILITIES type);
