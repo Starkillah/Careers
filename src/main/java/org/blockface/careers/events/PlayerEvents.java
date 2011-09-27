@@ -59,4 +59,10 @@ public class PlayerEvents extends PlayerListener {
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         if(event.getRightClicked() instanceof Player) CareersEvents.onPoke(event.getPlayer(),(Player)event.getRightClicked());
     }
+
+    @Override
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        if(JailManager.isJailed(event.getPlayer()))
+            event.setRespawnLocation(JailManager.getJail());
+    }
 }
