@@ -72,6 +72,7 @@ public class JailManager {
     public static void freeInmate(Player player) {
         Inmate inmate = jailed.get(player);
         jailed.remove(player);
+        if(!player.isOnline()) return;
         player.teleport(inmate.getHome());
         Language.FREED.good(player);
     }

@@ -48,7 +48,8 @@ public enum Language {
     POISONED_SUCCESS("notification.poisonedsuccess","You poisoned %s.",0),
     POISONED_FAST("notification.poisonedfast","You poisoned %s severely.",0),
     POISONED_DEATH("notification.poisoneddeath","%s has died from poisoning",0),
-    NIGHT_ONLY("notification.nightonly","You may only kill at night.",0)
+    NIGHT_ONLY("notification.nightonly","You may only kill at night.",0),
+    IN_HELL("notification.inhell","You are stuck in hell for %s seconds." ,0)
 
 
     ;

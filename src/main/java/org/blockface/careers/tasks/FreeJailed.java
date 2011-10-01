@@ -12,7 +12,6 @@ public class FreeJailed implements Runnable{
     }
 
     public void run() {
-        if(!player.isOnline()) return;
         JailManager.freeInmate(player);
     }
 }

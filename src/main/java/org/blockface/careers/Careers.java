@@ -11,6 +11,7 @@ import org.blockface.careers.events.PlayerEvents;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.locale.Logging;
 import org.blockface.careers.managers.EconomyManager;
+import org.blockface.careers.managers.HellManager;
 import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.persistance.PersistanceManager;
 import org.bukkit.event.Event;
@@ -50,6 +51,10 @@ public class Careers extends JavaPlugin {
 
             //Load Economy
             EconomyManager.load(this);
+
+            //Load Hell
+            HellManager.load();
+
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
@@ -77,6 +82,7 @@ public class Careers extends JavaPlugin {
         pm.registerEvent(Event.Type.PLAYER_INTERACT,pe, Event.Priority.Highest,this);
         pm.registerEvent(Event.Type.PLAYER_INTERACT_ENTITY,pe, Event.Priority.Highest,this);
         pm.registerEvent(Event.Type.PLAYER_TELEPORT,pe, Event.Priority.Highest,this);
+        pm.registerEvent(Event.Type.PLAYER_RESPAWN,pe, Event.Priority.Highest,this);
 
         //Entity Events
         EntityEvents ee = new EntityEvents();

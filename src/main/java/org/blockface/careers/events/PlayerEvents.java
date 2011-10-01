@@ -6,6 +6,7 @@ import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Language;
 import org.blockface.careers.locale.Logging;
 import org.blockface.careers.managers.CrimeManager;
+import org.blockface.careers.managers.HellManager;
 import org.blockface.careers.managers.JailManager;
 import org.blockface.careers.managers.WitnessManager;
 import org.blockface.careers.objects.Inmate;
@@ -63,7 +64,11 @@ public class PlayerEvents extends PlayerListener {
 
     @Override
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        if(JailManager.isJailed(event.getPlayer()))
+        if(JailManager.isJailed(event.getPlayer())){
             event.setRespawnLocation(JailManager.getJail());
+            return;}
+
+        HellManager.setDead(event.getPlayer());
+        event.setRespawnLocation(HellManager.getHell());
     }
 }

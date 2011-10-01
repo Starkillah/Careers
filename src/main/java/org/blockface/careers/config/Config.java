@@ -123,4 +123,8 @@ public class Config {
         return getInt(POISON_TIME)/6;
     }
 
+    public static int getHellTime() {
+        return getInt(HELL_TIME);
+    }
+
 }
