@@ -35,6 +35,7 @@ public class PlayerEvents extends PlayerListener {
             event.setCancelled(true);
             Inmate inmate = JailManager.getInmate(event.getPlayer());
             Language.JAIL_TIME.bad(event.getPlayer(),inmate.getTimeLeft());
+            event.getPlayer().teleport(JailManager.getJail());
         }
 
         //See if switch attempt
@@ -51,7 +52,7 @@ public class PlayerEvents extends PlayerListener {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         if(CrimeManager.isWanted(event.getPlayer().getName()) || JailManager.isJailed(event.getPlayer())) {
             Language.TELEPORT.bad(event.getPlayer());
-            event.setCancelled(true);
+            event.setTo(JailManager.getJail());
         }
     }
 
