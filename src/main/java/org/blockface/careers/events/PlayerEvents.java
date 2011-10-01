@@ -51,7 +51,7 @@ public class PlayerEvents extends PlayerListener {
 
     @Override
     public void onPlayerTeleport(PlayerTeleportEvent event) {
-        if(CrimeManager.isWanted(event.getPlayer().getName()) || JailManager.isJailed(event.getPlayer())) {
+        if(CrimeManager.isWanted(event.getPlayer().getName())) {
             Language.TELEPORT.bad(event.getPlayer());
             return;}
 
