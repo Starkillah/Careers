@@ -48,6 +48,7 @@ public class PlayerEvents extends PlayerListener {
 
     @Override
     public void onPlayerTeleport(PlayerTeleportEvent event) {
+        if(event.getFrom().distance(event.getTo()) < 5) return;
         if(CrimeManager.isWanted(event.getPlayer().getName()) || PoisonManager.isPoisoned(event.getPlayer())) {
             Language.TELEPORT.bad(event.getPlayer());
             return;}
