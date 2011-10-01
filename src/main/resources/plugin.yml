@@ -6,13 +6,16 @@ version: ${project.version}-b${build.number}
 commands:
     setjob:
         description: Set job.
-        usage: /setjob <career> [player];
+        usage: /setjob <career> [player]
+        permission: careers.setjob
     jobinfo:
         description: See info about job.
         usage: /info
     addexp:
         description: Add experience points.
         usage: /addexp <number>
+        permission: careers.addexp
     setjail:
         description: Set jail.
         usage: /setjail
+        permission: careers.setjail
