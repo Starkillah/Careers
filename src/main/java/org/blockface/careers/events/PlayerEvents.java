@@ -53,7 +53,13 @@ public class PlayerEvents extends PlayerListener {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         if(CrimeManager.isWanted(event.getPlayer().getName()) || JailManager.isJailed(event.getPlayer())) {
             Language.TELEPORT.bad(event.getPlayer());
-            event.setTo(JailManager.getJail());}
+            return;}
+
+        if(JailManager.isJailed(event.getPlayer())) {
+            Language.TELEPORT.bad(event.getPlayer());
+            event.setTo(JailManager.getJail());
+            return;}
+
         if(HellManager.isDead(event.getPlayer())) {
             Language.TELEPORT.bad(event.getPlayer());
             event.setTo(HellManager.getHell());}
