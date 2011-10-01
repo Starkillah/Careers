@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 public class CareersEvents {
 
     public static boolean canSwitch(Player player) {
+        if(JailManager.isJailed(player)) return false;
         Job job = JobsManager.getJob(player);
         if(!job.hasAbility(Job.ABILITIES.LOCKPICK)) return false;
         Boolean res = Tools.randBoolean(job.getAbilityChance());
@@ -71,7 +72,7 @@ public class CareersEvents {
             jp.addExperience();}
 
         //Poison
-        if(jp.hasAbility(Job.ABILITIES.POISON) && player.getItemInHand().getType().equals(Material.BROWN_MUSHROOM) && !PoisonManager.isPoisoned(rightClicked)) {
+        if(jp.hasAbility(Job.ABILITIES.POISON) && (player.getItemInHand().getType().equals(Material.BROWN_MUSHROOM) || player.getItemInHand().getType().equals(Material.RED_MUSHROOM)) && !PoisonManager.isPoisoned(rightClicked)) {
             PoisonManager.poisonPlayer(rightClicked,player, jp);}
     }
 

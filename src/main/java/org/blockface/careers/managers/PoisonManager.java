@@ -50,6 +50,8 @@ public class PoisonManager {
         poisonedPlayers.remove(victim.getName());
         victim.damage(10000);
         Language.POISONED_DEATH.good(attacker,victim.getDisplayName());
+        Job job = JobsManager.getJob(attacker);
+        job.addExperience();
         EconomyManager.payAll(victim,attacker);
     }
 
