@@ -78,4 +78,6 @@ public class PlayerEvents extends PlayerListener {
         HellManager.setDead(event.getPlayer());
         event.setRespawnLocation(HellManager.getHell());
     }
+
+
 }

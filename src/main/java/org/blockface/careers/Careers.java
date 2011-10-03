@@ -87,6 +87,7 @@ public class Careers extends JavaPlugin {
         //Entity Events
         EntityEvents ee = new EntityEvents();
         pm.registerEvent(Event.Type.ENTITY_DAMAGE,ee, Event.Priority.Normal,this);
+        pm.registerEvent(Event.Type.ENTITY_REGAIN_HEALTH,ee, Event.Priority.Normal,this);
     }
 
     public static Careers getInstance() {

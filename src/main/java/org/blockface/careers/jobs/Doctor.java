@@ -22,6 +22,12 @@ public class Doctor extends GenericJob {
     }
 
     @Override
+    public int getAbilityChance() {
+        float level = this.getLevel();
+        return (int)(100*(1-6/(level+6)));
+    }
+
+    @Override
     public void printInfo(Player player) {
         super.printInfo(player);
         player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "No Special Yet: " + getAbilityChance() + "%");

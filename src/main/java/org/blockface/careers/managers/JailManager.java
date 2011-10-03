@@ -71,11 +71,10 @@ public class JailManager {
     }
 
     public static void freeInmate(String name) {
-        Inmate inmate = jailed.get(name);
         jailed.remove(name);
         Player player = Tools.getPlayer(name);
         if(!player.isOnline()) return;
-        player.teleport(inmate.getHome());
+        player.teleport(Bukkit.getServer().getWorlds().get(0).getSpawnLocation());
         Language.FREED.good(player);
     }
 

@@ -1,11 +1,10 @@
 package org.blockface.careers.events;
 
+import org.blockface.careers.jobs.Job;
+import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Logging;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityListener;
+import org.bukkit.event.entity.*;
 import sun.rmi.runtime.Log;
 
 public class EntityEvents extends EntityListener{
@@ -33,5 +32,13 @@ public class EntityEvents extends EntityListener{
         }
     }
 
+    @Override
+    public void onEntityRegainHealth(EntityRegainHealthEvent event) {
+        if(!(event.getEntity() instanceof Player)) return;
+        Player player = (Player)event.getEntity();
+        Job job = JobsManager.getJob(player);
+        if(job.hasAbility(Job.ABILITIES.HEAL))
+            event.setAmount(event.getAmount()*(1+job.getAbilityChance()));
 
+    }
 }

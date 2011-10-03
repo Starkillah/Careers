@@ -77,7 +77,7 @@ public class CareersEvents {
 
         //Heal
         if(jrc.hasAbility(Job.ABILITIES.HEAL)) {
-            HealthManager.healPlayer(player,rightClicked);}
+            HealthManager.healPlayer(player,rightClicked,jrc);}
     }
 
     public static void onMobDamage(Entity entity, Player damager, int damage) {
