@@ -42,4 +42,19 @@ public class EconomyManager {
         Language.RECEIVED_MONEY.good(trg,method.format(amount));
     }
 
+    public static boolean pay(Player src, Player trg, double amount, String reason) {
+
+        Method.MethodAccount source = method.getAccount(src.getName());
+        Method.MethodAccount target = method.getAccount(trg.getName());
+        if(!source.hasEnough(amount)) {
+            Language.CANNOT_AFFORD.bad(src,method.format(amount-source.balance()),reason);
+            return false;
+        }
+        source.subtract(amount);
+        target.add(amount);
+        Language.RECEIVED_MONEY.good(trg,method.format(amount));
+        Language.SENT_MONEY.good(src,method.format(amount));
+        return true;
+    }
+
 }

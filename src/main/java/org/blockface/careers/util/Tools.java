@@ -1,8 +1,10 @@
 package org.blockface.careers.util;
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 public class Tools {
 
@@ -14,6 +16,10 @@ public class Tools {
     public static boolean isNight(Location location) {
         World world = location.getWorld();
         return world.getTime() > 14000;
+    }
+
+    public static Player getPlayer(String name) {
+        return Bukkit.getServer().getPlayer(name);
     }
 
 }

@@ -74,6 +74,10 @@ public class CareersEvents {
         //Poison
         if(jp.hasAbility(Job.ABILITIES.POISON) && (player.getItemInHand().getType().equals(Material.BROWN_MUSHROOM) || player.getItemInHand().getType().equals(Material.RED_MUSHROOM)) && !PoisonManager.isPoisoned(rightClicked)) {
             PoisonManager.poisonPlayer(rightClicked,player, jp);}
+
+        //Heal
+        if(jrc.hasAbility(Job.ABILITIES.HEAL)) {
+            HealthManager.healPlayer(player,rightClicked);}
     }
 
     public static void onMobDamage(Entity entity, Player damager, int damage) {

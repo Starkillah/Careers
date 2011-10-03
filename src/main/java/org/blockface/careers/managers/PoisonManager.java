@@ -43,11 +43,12 @@ public class PoisonManager {
     }
 
     public static void curePoison(Player player) {
-
+        if(!poisonedPlayers.remove(player)) return;
+        Language.POISONED_CURED.good(player);
     }
 
     public static void killPoisoned(Player victim, Player attacker) {
-        poisonedPlayers.remove(victim.getName());
+        if(!poisonedPlayers.remove(victim.getName())) return;
         victim.damage(10000);
         Language.POISONED_DEATH.good(attacker,victim.getDisplayName());
         Job job = JobsManager.getJob(attacker);

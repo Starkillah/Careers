@@ -127,4 +127,12 @@ public class Config {
         return getInt(HELL_TIME);
     }
 
+    public static int getHealCost() {
+        return getInt(HEAL_COST);
+    }
+
+    public static int getPoisonCureCost() {
+        return getInt(ConfigPath.CURE_POISON_COST);
+    }
+
 }

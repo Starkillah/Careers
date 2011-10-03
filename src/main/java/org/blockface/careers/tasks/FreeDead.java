@@ -5,9 +5,9 @@ import org.bukkit.entity.Player;
 
 public class FreeDead implements Runnable{
 
-    private Player player;
+    private String player;
 
-    public FreeDead(Player player) {
+    public FreeDead(String player) {
         this.player = player;
     }
 

@@ -7,6 +7,7 @@ import org.blockface.careers.objects.Crime;
 import org.blockface.careers.objects.Inmate;
 import org.blockface.careers.persistance.PersistanceManager;
 import org.blockface.careers.tasks.FreeJailed;
+import org.blockface.careers.util.Tools;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 
 public class JailManager {
 
-	private static HashMap<Player,Inmate> jailed = new HashMap<Player,Inmate>();
+	private static HashMap<String,Inmate> jailed = new HashMap<String,Inmate>();
     private static Location jail;
 
     public static void load() {
@@ -33,10 +34,10 @@ public class JailManager {
     }
 
     public static boolean isJailed(Player player) {
-        return jailed.containsKey(player);
+        return jailed.containsKey(player.getName());
     }
 
-    public static Inmate getInmate(Player player) {
+    public static Inmate getInmate(String player) {
         return jailed.get(player);
     }
 
@@ -51,8 +52,8 @@ public class JailManager {
         if(crime.getType() == Crime.CrimeType.WEAPONS) time = CareerConfig.GetWeaponsSentence();
         */
         criminal.teleport(jail);
-		jailed.put(criminal, new Inmate(criminal, crime, time));
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(), new FreeJailed(criminal), 20L * time * 60);
+		jailed.put(criminal.getName(), new Inmate(criminal, crime, time));
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Careers.getInstance(), new FreeJailed(criminal.getName()), 20L * time * 60);
         Language.ARRESTED.broadcastGood(criminal.getName(),crime.getType().name().toLowerCase());
         EconomyManager.payWage(officer, Config.getOfficerWage());
     }
@@ -69,9 +70,10 @@ public class JailManager {
         }
     }
 
-    public static void freeInmate(Player player) {
-        Inmate inmate = jailed.get(player);
-        jailed.remove(player);
+    public static void freeInmate(String name) {
+        Inmate inmate = jailed.get(name);
+        jailed.remove(name);
+        Player player = Tools.getPlayer(name);
         if(!player.isOnline()) return;
         player.teleport(inmate.getHome());
         Language.FREED.good(player);

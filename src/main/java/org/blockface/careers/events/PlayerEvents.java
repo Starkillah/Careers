@@ -31,7 +31,7 @@ public class PlayerEvents extends PlayerListener {
 
         if(JailManager.isJailed(event.getPlayer())) {
             event.setCancelled(true);
-            Inmate inmate = JailManager.getInmate(event.getPlayer());
+            Inmate inmate = JailManager.getInmate(event.getPlayer().getName());
             Language.JAIL_TIME.bad(event.getPlayer(),inmate.getTimeLeft());
             event.getPlayer().teleport(JailManager.getJail());
         }
@@ -58,7 +58,7 @@ public class PlayerEvents extends PlayerListener {
             event.setTo(JailManager.getJail());
             return;}
 
-        if(HellManager.isDead(event.getPlayer())) {
+        if(HellManager.isDead(event.getPlayer().getName())) {
             Language.TELEPORT.bad(event.getPlayer());
             event.setTo(HellManager.getHell());}
 

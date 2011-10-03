@@ -13,7 +13,9 @@ public enum ConfigPath {
     KNIGHT_WAGE("settings.economy.knightReward",5,"# Amount to pay knight for each mob kill."),
     WANTED_TIME("settings.crime.wantedTime",5,"# Amount of time criminal stays wanted."),
     POISON_TIME("settings.crime.poisonTime",60,"# Seconds until poison kills player."),
-    HELL_TIME("settings.death.hellTime",60,"# Seconds player is trapped in hell.")
+    HELL_TIME("settings.death.hellTime",60,"# Seconds player is trapped in hell."),
+    HEAL_COST("settings.doctor.costPerHeart",3,"# Cost per heart."),
+    CURE_POISON_COST("settings.doctor.curePoisonCost",30,"# Cost per heart."),
     ;
 
 
