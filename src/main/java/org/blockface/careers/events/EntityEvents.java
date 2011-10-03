@@ -38,7 +38,7 @@ public class EntityEvents extends EntityListener{
         Player player = (Player)event.getEntity();
         Job job = JobsManager.getJob(player);
         if(job.hasAbility(Job.ABILITIES.HEAL))
-            event.setAmount(event.getAmount()*(1+job.getAbilityChance()));
+            event.setAmount(event.getAmount()*(int)((100f+job.getAbilityChance())/100f));
 
     }
 }

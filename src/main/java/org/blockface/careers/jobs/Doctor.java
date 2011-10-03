@@ -30,6 +30,6 @@ public class Doctor extends GenericJob {
     @Override
     public void printInfo(Player player) {
         super.printInfo(player);
-        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "No Special Yet: " + getAbilityChance() + "%");
+        player.sendMessage(ChatColor.DARK_GRAY + "| " + ChatColor.GREEN + "Health Regen Rate: " + (100+getAbilityChance()) + "%");
     }
 }
