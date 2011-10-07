@@ -93,11 +93,11 @@ public class CareersEvents {
     	Boolean res = Tools.randBoolean(job.getAbilityChance());
     	if(res) {
             job.addExperience();
-            Language.THEFT_SUCCEEDED.good(thief);
+            Language.PICKPOCKETED.good(thief);
             EconomyManager.pocketpicked(thief, mark);
         }
         else {
-            Language.THEFT_FAILED.bad(thief);
+            Language.FAILED_PICKPOCKET.bad(thief);
             thief.damage(Config.getThiefDamage());
             CrimeManager.addWanted(thief.getName(), Crime.TYPE.THEFT);
         }

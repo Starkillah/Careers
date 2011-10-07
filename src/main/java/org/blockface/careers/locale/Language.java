@@ -51,7 +51,9 @@ public enum Language {
     POISONED_CURED("notification.poison.cured","You have been cured of poison.",0),
     NIGHT_ONLY("notification.nightonly","You may only kill at night.",0),
     IN_HELL("notification.inhell","You are stuck in hell for %s seconds." ,0),
-    CANNOT_AFFORD("notification.cannotafford","You need an additional %s for %s" ,0)
+    CANNOT_AFFORD("notification.cannotafford","You need an additional %s for %s" ,0),
+    PICKPOCKETED("notification.pickPocketed","You managed to pickpocket %s" ,0),
+    FAILED_PICKPOCKET("notification.failedPickPocket","You've been caught trying to pickpocket!" ,0)
 
 
     ;
