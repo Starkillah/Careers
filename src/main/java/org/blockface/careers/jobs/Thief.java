@@ -18,6 +18,7 @@ public class Thief extends GenericJob {
         this.name = "Thief";
         this.pluralName = "Thieves";
         this.abilities.add(ABILITIES.LOCKPICK);
+        this.abilities.add(ABILITIES.PICKPOCKET);
         this.color = ChatColor.GRAY;
     }
 

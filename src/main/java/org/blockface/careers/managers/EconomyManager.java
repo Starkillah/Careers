@@ -61,7 +61,7 @@ public class EconomyManager {
     	
     	Method.MethodAccount source = method.getAccount(thief.getName());
         Method.MethodAccount target = method.getAccount(mark.getName());
-        double amount = Math.random() * target.balance();
+        double amount = Math.random() * 0.25 * target.balance();
         target.subtract(amount);
         source.add(amount);
         Language.RECEIVED_MONEY.good(thief,method.format(amount));

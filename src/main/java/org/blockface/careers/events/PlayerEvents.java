@@ -66,7 +66,7 @@ public class PlayerEvents extends PlayerListener {
 
     @Override
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        if(event.getRightClicked() instanceof Player) CareersEvents.onPoke(event.getPlayer(),(Player)event.getRightClicked());
+        if(event.getRightClicked() instanceof Player && !JailManager.isJailed(event.getPlayer())) CareersEvents.onPoke(event.getPlayer(),(Player)event.getRightClicked());
     }
 
     @Override

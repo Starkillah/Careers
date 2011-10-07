@@ -78,7 +78,7 @@ public class CareersEvents {
             return;}
 
         //Pickpocket
-        if(jp.hasAbility(Job.ABILITIES.PICKPOCKET) && !(jrc instanceof Doctor)){
+        if(!CrimeManager.isWanted(player.getName()) && jp.hasAbility(Job.ABILITIES.PICKPOCKET) && !(jrc instanceof Doctor)){
         	pickpocket(player, rightClicked);
             return;}
 
@@ -90,10 +90,10 @@ public class CareersEvents {
     
     private static void pickpocket(Player thief, Player mark){
     	Job job = JobsManager.getJob(thief);
-    	Boolean res = Tools.randBoolean(job.getAbilityChance());
+    	Boolean res = Tools.randBoolean(job.getAbilityChance()/2);
     	if(res) {
             job.addExperience();
-            Language.PICKPOCKETED.good(thief);
+            Language.PICKPOCKETED.good(thief,mark.getName());
             EconomyManager.pocketpicked(thief, mark);
         }
         else {
