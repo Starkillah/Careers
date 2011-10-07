@@ -3,6 +3,7 @@ package org.blockface.careers.events;
 import org.blockface.careers.jobs.Job;
 import org.blockface.careers.jobs.JobsManager;
 import org.blockface.careers.locale.Logging;
+import org.blockface.careers.util.Tools;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.*;
 import sun.rmi.runtime.Log;
@@ -38,7 +39,7 @@ public class EntityEvents extends EntityListener{
         Player player = (Player)event.getEntity();
         Job job = JobsManager.getJob(player);
         if(job.hasAbility(Job.ABILITIES.HEAL))
-            event.setAmount(event.getAmount()*(int)((100f+job.getAbilityChance())/100f));
+            if(Tools.randBoolean(job.getAbilityChance())) event.setAmount(event.getAmount()+3);
 
     }
 }

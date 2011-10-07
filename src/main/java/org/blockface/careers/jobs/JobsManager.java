@@ -24,6 +24,7 @@ public class JobsManager {
         if(job.equalsIgnoreCase("Knight")) ret = new Knight(player);
         if(job.equalsIgnoreCase("Assassin")) ret = new Assassin(player);
         if(job.equalsIgnoreCase("Doctor")) ret = new Doctor(player);
+        if(job.equalsIgnoreCase("Boss")) ret = new Boss(player);
         return ret;
     }
 

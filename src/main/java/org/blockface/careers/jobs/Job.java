@@ -13,6 +13,7 @@ public interface Job {
         KILL,
         POISON,
         SUPERSMELT,
+        PICKPOCKET,
         ARREST
     }
 
@@ -26,7 +27,7 @@ public interface Job {
 
     public String getPlayer();
 
-    public int getAbilityChance();
+    public double getAbilityChance();
 
     public void setPlayer(String player);
 

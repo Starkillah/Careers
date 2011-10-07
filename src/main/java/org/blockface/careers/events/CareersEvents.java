@@ -69,15 +69,39 @@ public class CareersEvents {
         //Police Arrest
         if(jp.hasAbility(Job.ABILITIES.ARREST) && CrimeManager.isWanted(rightClicked.getName())) {
             JailManager.arrestPlayer(rightClicked,player);
-            jp.addExperience();}
+            jp.addExperience();
+            return;}
 
         //Poison
         if(jp.hasAbility(Job.ABILITIES.POISON) && (player.getItemInHand().getType().equals(Material.BROWN_MUSHROOM) || player.getItemInHand().getType().equals(Material.RED_MUSHROOM)) && !PoisonManager.isPoisoned(rightClicked)) {
-            PoisonManager.poisonPlayer(rightClicked,player, jp);}
+            PoisonManager.poisonPlayer(rightClicked,player, jp);
+            return;}
+
+        //Pickpocket
+        if(jp.hasAbility(Job.ABILITIES.PICKPOCKET) && !(jrc instanceof Doctor)){
+        	pickpocket(player, rightClicked);
+            return;}
 
         //Heal
         if(jrc.hasAbility(Job.ABILITIES.HEAL)) {
             HealthManager.healPlayer(player,rightClicked,jrc);}
+        
+    }
+    
+    private static void pickpocket(Player thief, Player mark){
+    	Job job = JobsManager.getJob(thief);
+    	Boolean res = Tools.randBoolean(job.getAbilityChance());
+    	if(res) {
+            job.addExperience();
+            Language.THEFT_SUCCEEDED.good(thief);
+            EconomyManager.pocketpicked(thief, mark);
+        }
+        else {
+            Language.THEFT_FAILED.bad(thief);
+            thief.damage(Config.getThiefDamage());
+            CrimeManager.addWanted(thief.getName(), Crime.TYPE.THEFT);
+        }
+    	
     }
 
     public static void onMobDamage(Entity entity, Player damager, int damage) {

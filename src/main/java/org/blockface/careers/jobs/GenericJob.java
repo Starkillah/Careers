@@ -53,9 +53,9 @@ public class GenericJob implements Job{
         return this.player;
     }
 
-    public int getAbilityChance() {
+    public double getAbilityChance() {
         float level = this.getLevel();
-        return (int)(50*(1-6/(level+6)));
+        return Math.floor(50*(1-6/(level+6)));
     }
 
     public void setPlayer(String player) {

@@ -57,4 +57,14 @@ public class EconomyManager {
         return true;
     }
 
+    public static void pocketpicked(Player thief, Player mark){
+    	
+    	Method.MethodAccount source = method.getAccount(thief.getName());
+        Method.MethodAccount target = method.getAccount(mark.getName());
+        double amount = Math.random() * target.balance();
+        target.subtract(amount);
+        source.add(amount);
+        Language.RECEIVED_MONEY.good(thief,method.format(amount));
+    }
+    
 }
